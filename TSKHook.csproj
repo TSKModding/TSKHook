@@ -1,0 +1,319 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>TSKHook</AssemblyName>
+    <Description>TSKHook</Description>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>TSKHook</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppMono.Security">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2CppMono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2CppSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Configuration">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2CppSystem.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Core">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2CppSystem.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Data">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2CppSystem.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Numerics">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2CppSystem.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Runtime.Serialization">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.ServiceModel.Internals">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2CppSystem.ServiceModel.Internals.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Xml">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2CppSystem.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Xml.Linq">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Il2CppSystem.Xml.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="spine-timeline">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\spine-timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="spine-unity">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\spine-unity.dll</HintPath>
+    </Reference>
+    <Reference Include="spine-unity-examples">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\spine-unity-examples.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Addressables">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Addressables.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ResourceManager">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.ResourceManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Services.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Configuration">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Services.Core.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Device">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Services.Core.Device.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Environments.Internal">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Services.Core.Environments.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Internal">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Services.Core.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Registration">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Services.Core.Registration.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Scheduler">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Services.Core.Scheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Telemetry">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Services.Core.Telemetry.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Threading">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Services.Core.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.AccessibilityModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.AIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.AndroidJNIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.ClusterInputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.ClusterRendererModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.CrashReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.DirectorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.DSPGraphModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.GameCenterModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GIModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.GIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.GridModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.HotReloadModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.LocalizationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.PerformanceReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ProfilerModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.ProfilerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.ScreenCaptureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.SharedInternalsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.SpriteMaskModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.SpriteShapeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.StreamingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.SubstanceModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.SubsystemsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreFontEngineModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreTextEngineModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.TextCoreTextEngineModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.TilemapModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.TLSModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsNativeModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UIElementsNativeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UmbraModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UNETModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UNETModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsCommonModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UnityAnalyticsCommonModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityCurlModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UnityCurlModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.VehiclesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VFXModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.VFXModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VirtualTexturingModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.VirtualTexturingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.WindModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.XRModule">
+      <HintPath>C:\Users\husky\Twinkle_StarKnightsX\BepInEx\interop\UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy config.json $(OutDir)&#xD;&#xA;copy SS_Notification.ps1 $(OutDir)" />
+  </Target>
+</Project>
