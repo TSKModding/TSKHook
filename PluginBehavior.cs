@@ -1,15 +1,18 @@
 ﻿using System;
 using UnityEngine;
+using Utage;
 
 namespace TSKHook;
 
 public class PluginBehavior : MonoBehaviour
 {
     private static readonly float WaitTime = 1.0f;
+    private static readonly float CtrlWaitTime = 0.1f;
     public static bool IsGameSpeedChanged { get; set; }
     public static float CurrentGameSpeed { get; set; }
     private static float LastGSExecuteTime { get; set; }
     private static float LastFPSExecuteTime { get; set; }
+    private static float LastSkipExecuteTime { get; set; }
 
     private void Update()
     {
@@ -72,6 +75,17 @@ public class PluginBehavior : MonoBehaviour
             ScreenCapture.CaptureScreenshot(location);
 
             Notification.SsPopup(location);
+        }
+
+        LastSkipExecuteTime += Time.deltaTime;
+        if (LastSkipExecuteTime >= CtrlWaitTime && Input.GetKey(KeyCode.LeftControl) || LastSkipExecuteTime >= CtrlWaitTime && Input.GetKey(KeyCode.RightControl))
+        {
+            LastSkipExecuteTime = 0.0f;
+            AdvEngine advEngine = FindObjectOfType<AdvEngine>() as AdvEngine;
+            if (advEngine != null)
+            {
+                advEngine.page.EndPage();
+            }
         }
 
         LastGSExecuteTime += Time.deltaTime;
