@@ -8,6 +8,7 @@ public class TSKConfig
 {
     public static double Speed;
     public static int FPS;
+    public static bool TranslationEnabled;
 
     public static void Read()
     {
@@ -18,10 +19,12 @@ public class TSKConfig
             var config = doc.RootElement;
             Speed = config.GetProperty("speed").GetDouble();
             FPS = config.GetProperty("fps").GetInt32();
+            TranslationEnabled = config.GetProperty("translation").GetBoolean();
 
             Plugin.Global.Log.LogInfo("Current setting:");
             Plugin.Global.Log.LogInfo("Game speed(each step): " + Speed);
             Plugin.Global.Log.LogInfo("FPS: " + FPS);
+            Plugin.Global.Log.LogInfo("Translation: " + (TranslationEnabled ? "Enabled" : "Disabled"));
         }
         else
         {

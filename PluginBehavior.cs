@@ -67,6 +67,13 @@ public class PluginBehavior : MonoBehaviour
             Notification.Popup("Game Speed", text);
         }
 
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            TSKConfig.TranslationEnabled = !TSKConfig.TranslationEnabled;
+            Plugin.Global.Log.LogInfo("Translation: " + (TSKConfig.TranslationEnabled ? "Enabled" : "Disabled"));
+            Notification.Popup("Translation", TSKConfig.TranslationEnabled ? "Enabled" : "Disabled");
+        }
+
         if (Input.GetKeyDown(KeyCode.F12))
         {
             var username = Environment.UserName;
