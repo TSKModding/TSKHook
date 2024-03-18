@@ -1,6 +1,8 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
+using System;
+using System.Text;
 
 namespace TSKHook;
 
@@ -9,6 +11,8 @@ public class Plugin : BasePlugin
 {
     public override void Load()
     {
+        Console.OutputEncoding = Encoding.UTF8;
+
         var log = Log;
         Global.Log = log;
         Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
