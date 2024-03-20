@@ -1,4 +1,5 @@
 {
-    "speed": 0.5,
-    "fps": 60
+  "speed": 0.5,
+  "fps": 60,
+  "translation": true
 }
