@@ -1,5 +1,7 @@
 # TSKHook
 
+## [中文](README_TC.md)
+
 Twinkle Star Knights mod for DMM Game Player version
 
 ## Feature
