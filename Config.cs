@@ -17,9 +17,21 @@ public class TSKConfig
             var content = File.InternalReadAllText("./BepInEx/plugins/config.json", Encoding.UTF8);
             var doc = JsonDocument.Parse(content);
             var config = doc.RootElement;
-            Speed = config.GetProperty("speed").GetDouble();
-            FPS = config.GetProperty("fps").GetInt32();
-            TranslationEnabled = config.GetProperty("translation").GetBoolean();
+
+            if (config.TryGetProperty("speed", out var sValue))
+            {
+                Speed = sValue.GetDouble();
+            }
+
+            if (config.TryGetProperty("fps", out var fValue))
+            {
+                FPS = fValue.GetInt32();
+            }
+
+            if (config.TryGetProperty("translation", out var tValue))
+            {
+                TranslationEnabled = tValue.GetBoolean();
+            }
 
             Plugin.Global.Log.LogInfo("Current setting:");
             Plugin.Global.Log.LogInfo("Game speed(each step): " + Speed);
