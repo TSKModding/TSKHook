@@ -54,7 +54,7 @@ public class Patch
         }
 
         string value;
-        if (Translation.chapterDicts[currentAdvId].TryGetValue(__instance.TitleText, out value))
+        if (Translation.chapterDicts.ContainsKey(currentAdvId) && Translation.chapterDicts[currentAdvId].TryGetValue(__instance.TitleText, out value))
         {
             __instance.TitleText = value.IsNullOrEmpty() ? __instance.TitleText : value;
         }
@@ -103,7 +103,7 @@ public class Patch
         }
 
         string value;
-        if (Translation.chapterDicts[currentAdvId].TryGetValue(__result, out value))
+        if (Translation.chapterDicts.ContainsKey(currentAdvId) && Translation.chapterDicts[currentAdvId].TryGetValue(__result, out value))
         {
             __result = value.IsNullOrEmpty() ? __result : value;
         }
