@@ -40,7 +40,8 @@ You can edit config.json(`./BepInEx/plugins/config.json`) if you don't like defa
 | F6   | Reset       | Reset game speed to 1x/normal                                                 | 
 | F7   | Decrease    | Decrease game speed (2-0.5 etc), depends on your `speed` config               | 
 | F8   | Increase    | Increase game speed (1+0.5 etc), depends on your `speed` config               |
-| F9   | Translation | Enable/Disable translation feature                                            |
+| F11  | Translation | Clear translation cache                                                       |
+| F11  | Translation | Enable/Disable translation feature                                            |
 | F12  | Screenshot  | Screenshot current frame and save to Pictures(`C:\Users\<username>\Pictures`) |
 | Ctrl | Skip text   | Skip text via Ctrl button, just like Galgame control system                   |
 

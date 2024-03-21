@@ -67,6 +67,13 @@ public class PluginBehavior : MonoBehaviour
             Notification.Popup("Game Speed", text);
         }
 
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            Translation.chapterDicts = new();
+            Plugin.Global.Log.LogInfo("[Translator] cache cleared.");
+            Notification.Popup("Translation", "Translation cache cleared.");
+        }
+
         if (Input.GetKeyDown(KeyCode.F11))
         {
             TSKConfig.TranslationEnabled = !TSKConfig.TranslationEnabled;
