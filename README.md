@@ -20,7 +20,7 @@ Twinkle Star Knights mod for DMM Game Player version
 ## Installation
 
 Download and extract [Release](https://github.com/c0re100/TSKHook/releases) zip to your Twinkle Star Knights install
-location `C:\Users\<username>>\Twinkle_StarKnightsX)`
+location `C:\Users\<username>\Twinkle_StarKnightsX`
 
 ## Config
 

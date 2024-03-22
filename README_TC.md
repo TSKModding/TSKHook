@@ -20,7 +20,7 @@
 ## 安裝方法
 
 下載[Release](https://github.com/c0re100/TSKHook/releases)
-並解壓縮至您的星騎士安裝位置 `C:\Users\<username>>\Twinkle_StarKnightsX)`
+並解壓縮至您的星騎士安裝位置 `C:\Users\<username>\Twinkle_StarKnightsX`
 
 ## 設定
 
