@@ -1,4 +1,8 @@
-﻿using HarmonyLib;
+﻿using System.IO;
+using BepInEx;
+using HarmonyLib;
+using TMPro;
+using UnityEngine;
 using Utage;
 using UtageExtensions;
 
@@ -7,6 +11,9 @@ namespace TSKHook;
 public class Patch
 {
     private static string currentAdvId;
+    public static string fontName = "notosanscjktc";
+    public static Font TranslateFont;
+    public static TMP_FontAsset TMPTranslateFont;
 
     public static void Initialize()
     {
@@ -35,6 +42,14 @@ public class Patch
 
         if (scenarioLabel != null)
         {
+            if (TranslateFont == null && File.Exists($"{Paths.PluginPath}/font/{fontName}"))
+            {
+                var ab = AssetBundle.LoadFromFile($"{Paths.PluginPath}/font/{fontName}");
+                TranslateFont = ab.LoadAsset(fontName).Cast<Font>();
+                TMPTranslateFont = ab.LoadAsset(fontName + " SDF")?.TryCast<TMP_FontAsset>();
+                ab.Unload(false);
+            }
+
             currentAdvId = scenarioLabel.ToLower();
             if (!Translation.chapterDicts.ContainsKey(currentAdvId))
             {
@@ -46,7 +61,7 @@ public class Patch
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(AdventureTitleBandView), "Initialize")]
-    public static void AdvInit(AdventureTitleBandView __instance)
+    public static void AdvIniPre(AdventureTitleBandView __instance)
     {
         if (!TSKConfig.TranslationEnabled)
         {
@@ -57,6 +72,37 @@ public class Patch
         if (Translation.chapterDicts.ContainsKey(currentAdvId) && Translation.chapterDicts[currentAdvId].TryGetValue(__instance.TitleText, out value))
         {
             __instance.TitleText = value.IsNullOrEmpty() ? __instance.TitleText : value;
+        }
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(AdventureTitleBandView), "Initialize")]
+    public static void AdvInitPost(AdventureTitleBandView __instance)
+    {
+        if (!TSKConfig.TranslationEnabled)
+        {
+            return;
+        }
+
+        if (TMPTranslateFont != null)
+        {
+            __instance.upTextComp.text.font = TMPTranslateFont;
+            __instance.donwTextComp.text.font = TMPTranslateFont;
+        }
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(UguiNovelText), "OnEnable")]
+    public static void FontPatch(ref UguiNovelText __instance)
+    {
+        if (!TSKConfig.TranslationEnabled)
+        {
+            return;
+        }
+
+        if (TranslateFont != null)
+        {
+            __instance.font = TranslateFont;
         }
     }
 
