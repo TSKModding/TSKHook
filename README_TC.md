@@ -1,6 +1,6 @@
 # TSKHook
 
-## [English](README_TC.md)
+## [English](README.md)
 
 星騎士mod (DMM Game Player版)
 
