@@ -88,6 +88,17 @@ public class Patch
         {
             __instance.upTextComp.text.font = TMPTranslateFont;
             __instance.donwTextComp.text.font = TMPTranslateFont;
+
+            for (int i = 0; i < __instance.titleText.Length; i++)
+            {
+                __instance.titleText[i].font = TMPTranslateFont;
+            }
+
+            for (int i = 0; i < __instance.donwTextObject.Length; i++)
+            {
+                TKSTextTMPGUI component = __instance.donwTextObject[i].GetComponent<TKSTextTMPGUI>();
+                component.text.font = TMPTranslateFont;
+            }
         }
     }
 
