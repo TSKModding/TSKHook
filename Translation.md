@@ -6,7 +6,7 @@
 
 ## 很重要所以說三次
 
-### 翻譯討論群: [Discord](https://discord.gg/FyBPtkbdRb)
+### 翻譯討論群: [Discord](https://discord.gg/XAgHS4zAAk)
 
 ### 翻譯狀況
 
