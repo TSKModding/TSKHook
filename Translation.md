@@ -30,7 +30,7 @@
 
 如果您有日文能力的話，可以為這份翻譯貢獻一己之力
 
-任何人都可以到我們的[協作翻譯平台](https://translation.lolida.best/)查看及修正，感激不盡！
+任何人都可以到我們的[協作翻譯平台](https://translation.lolida.best/projects/tsk/)查看及修正，感激不盡！
 
 ### 翻譯修改教學
 
