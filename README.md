@@ -31,11 +31,14 @@ You can edit config.json(`./BepInEx/plugins/config.json`) if you don't like defa
 | speed     | 0.5           | Increase/Decrease game speed each step (per click)           | 
 | fps       | 60            | Override FPS setting, take effects when value bigger than 60 |
 | translate | true          | Enable/Disable translation feature                           |
+| width     | 1280          | Window width: 1280                                           |
+| height    | 720           | Window height: 720                                           |
 
 ## Key binding
 
 | Key  | Type        | Description                                                                   |
 |------|-------------|-------------------------------------------------------------------------------|
+| F1   | Reload      | Reload TSKHook config, useful when you need to resize game window size        |
 | F5   | Freeze      | Freeze game, mean set game speed to 0x                                        |
 | F6   | Reset       | Reset game speed to 1x/normal                                                 | 
 | F7   | Decrease    | Decrease game speed (2-0.5 etc), depends on your `speed` config               | 
