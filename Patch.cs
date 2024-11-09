@@ -165,4 +165,11 @@ public class Patch
             __result = value.IsNullOrEmpty() ? __result : value;
         }
     }
+
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(Screen), "SetResolution", new[] { typeof(int), typeof(int), typeof(bool) })]
+    public static bool SetWindowSize(ref int width, ref int height, ref bool fullscreen)
+    {
+        return false;
+    }
 }

@@ -18,6 +18,7 @@ public class Plugin : BasePlugin
         Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
 
         TSKConfig.Read();
+        Window.Init();
         Translation.Init();
         Patch.Initialize();
 

@@ -9,6 +9,8 @@ public class TSKConfig
     public static double Speed;
     public static int FPS;
     public static bool TranslationEnabled;
+    public static int width;
+    public static int height;
 
     public static void Read()
     {
@@ -50,7 +52,27 @@ public class TSKConfig
                 needWrite = true;
             }
 
-            if (needWrite) WriteJsonFile(Speed, FPS, TranslationEnabled);
+            if (config.TryGetProperty("width", out var wValue))
+            {
+                width = wValue.GetInt32();
+            }
+            else
+            {
+                width = 1280;
+                needWrite = true;
+            }
+
+            if (config.TryGetProperty("height", out var hValue))
+            {
+                height = hValue.GetInt32();
+            }
+            else
+            {
+                height = 720;
+                needWrite = true;
+            }
+
+            if (needWrite) WriteJsonFile(Speed, FPS, TranslationEnabled, width, width);
 
             Plugin.Global.Log.LogInfo("Current setting:");
             Plugin.Global.Log.LogInfo("Game speed(each step): " + Speed);
@@ -64,19 +86,23 @@ public class TSKConfig
             Speed = 0.5;
             FPS = 60;
             TranslationEnabled = true;
+            width = 1280;
+            height = 720;
 
             // Create default JSON file
-            WriteJsonFile(0.5, 60, true);
+            WriteJsonFile(0.5, 60, true, width, height);
         }
     }
 
-    public static void WriteJsonFile(double speed, int fps, bool enabled)
+    public static void WriteJsonFile(double speed, int fps, bool enabled, int w, int h)
     {
         var config = new config
         {
             speed = speed,
             fps = fps,
-            translation = enabled
+            translation = enabled,
+            width = w,
+            height = h
         };
 
         var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
@@ -88,5 +114,7 @@ public class TSKConfig
         public double speed { get; set; }
         public int fps { get; set; }
         public bool translation { get; set; }
+        public int width { get; set; }
+        public int height { get; set; }
     }
 }
