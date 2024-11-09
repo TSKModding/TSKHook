@@ -91,6 +91,13 @@ public class PluginBehavior : MonoBehaviour
             Notification.SsPopup(location);
         }
 
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            TSKConfig.Read();
+            Window.Init();
+            Plugin.Global.Log.LogInfo("[Config] reloaded.");
+        }
+
         LastSkipExecuteTime += Time.deltaTime;
         if (LastSkipExecuteTime >= CtrlWaitTime && Input.GetKey(KeyCode.LeftControl) || LastSkipExecuteTime >= CtrlWaitTime && Input.GetKey(KeyCode.RightControl))
         {
