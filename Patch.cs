@@ -12,6 +12,7 @@ public class Patch
 {
     private static string currentAdvId;
     public static string fontName = "notosanscjktc";
+    public static AssetBundle fontBundle;
     public static Font TranslateFont;
     public static TMP_FontAsset TMPTranslateFont;
 
@@ -42,12 +43,20 @@ public class Patch
 
         if (scenarioLabel != null)
         {
-            if (TranslateFont == null && File.Exists($"{Paths.PluginPath}/font/{fontName}"))
+            if ((TranslateFont == null || TMPTranslateFont == null) && File.Exists($"{Paths.PluginPath}/font/{fontName}"))
             {
-                var ab = AssetBundle.LoadFromFile($"{Paths.PluginPath}/font/{fontName}");
-                TranslateFont = ab.LoadAsset(fontName).Cast<Font>();
-                TMPTranslateFont = ab.LoadAsset(fontName + " SDF")?.TryCast<TMP_FontAsset>();
-                ab.Unload(false);
+                if (fontBundle == null)
+                {
+                    fontBundle = AssetBundle.LoadFromFile($"{Paths.PluginPath}/font/{fontName}");
+                }
+                TranslateFont = fontBundle.LoadAsset(fontName).Cast<Font>();
+                TMPTranslateFont = fontBundle.LoadAsset(fontName + " SDF").TryCast<TMP_FontAsset>();
+                fontBundle.Unload(false);
+
+                if (TranslateFont != null && TMPTranslateFont != null)
+                {
+                    Plugin.Global.Log.LogInfo("Font loaded.");
+                }
             }
 
             currentAdvId = scenarioLabel.ToLower();
