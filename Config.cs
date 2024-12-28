@@ -72,7 +72,7 @@ public class TSKConfig
                 needWrite = true;
             }
 
-            if (needWrite) WriteJsonFile(Speed, FPS, TranslationEnabled, width, width);
+            if (needWrite) WriteJsonFile(Speed, FPS, TranslationEnabled, width, height);
 
             Plugin.Global.Log.LogInfo("Current setting:");
             Plugin.Global.Log.LogInfo("Game speed(each step): " + Speed);
