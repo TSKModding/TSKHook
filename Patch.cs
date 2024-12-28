@@ -181,4 +181,25 @@ public class Patch
     {
         return false;
     }
+
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(MaximizeCharaView), "SetCharaRoot_Scale")]
+    public static void SetCharaRoot_Scale(ref MaximizeZoomEventData _zoomData)
+    {
+        if (_zoomData.PinchData > 0)
+        {
+            _zoomData.PinchData = TSKConfig.zoom;
+        }
+        else
+        {
+            _zoomData.PinchData = -TSKConfig.zoom;
+        }
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(MaximizeCharaView), "initialize")]
+    public static void CharaViewInit(ref MaximizeCharaView __instance)
+    {
+        __instance.maximizeMinSize = 0.1f;
+    }
 }

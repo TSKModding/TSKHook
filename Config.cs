@@ -11,6 +11,7 @@ public class TSKConfig
     public static bool TranslationEnabled;
     public static int width;
     public static int height;
+    public static float zoom;
 
     public static void Read()
     {
@@ -72,12 +73,23 @@ public class TSKConfig
                 needWrite = true;
             }
 
-            if (needWrite) WriteJsonFile(Speed, FPS, TranslationEnabled, width, height);
+            if (config.TryGetProperty("zoom", out var zValue))
+            {
+                zoom = (float)zValue.GetDouble();
+            }
+            else
+            {
+                zoom = 1.0f;
+                needWrite = true;
+            }
+
+            if (needWrite) WriteJsonFile(Speed, FPS, TranslationEnabled, width, width, zoom);
 
             Plugin.Global.Log.LogInfo("Current setting:");
             Plugin.Global.Log.LogInfo("Game speed(each step): " + Speed);
             Plugin.Global.Log.LogInfo("FPS: " + FPS);
             Plugin.Global.Log.LogInfo("Translation: " + (TranslationEnabled ? "Enabled" : "Disabled"));
+            Plugin.Global.Log.LogInfo("Zoom ratio: " + zoom);
         }
         else
         {
@@ -88,13 +100,14 @@ public class TSKConfig
             TranslationEnabled = true;
             width = 1280;
             height = 720;
+            zoom = 1.0f;
 
             // Create default JSON file
-            WriteJsonFile(0.5, 60, true, width, height);
+            WriteJsonFile(0.5, 60, true, width, height, zoom);
         }
     }
 
-    public static void WriteJsonFile(double speed, int fps, bool enabled, int w, int h)
+    public static void WriteJsonFile(double speed, int fps, bool enabled, int w, int h, float z)
     {
         var config = new config
         {
@@ -102,7 +115,8 @@ public class TSKConfig
             fps = fps,
             translation = enabled,
             width = w,
-            height = h
+            height = h,
+            zoom = z
         };
 
         var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
@@ -116,5 +130,6 @@ public class TSKConfig
         public bool translation { get; set; }
         public int width { get; set; }
         public int height { get; set; }
+        public float zoom { get; set; }
     }
 }
