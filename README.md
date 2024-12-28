@@ -11,6 +11,8 @@ Twinkle Star Knights mod for DMM Game Player version
 2. In-game Screenshot
 3. FPS setting
 4. [Translation](Translation.md) (Traditional Chinese only)
+5. Game window size setting
+6. Picture Book zoom ratio
 
 ## Requirement
 
@@ -31,8 +33,8 @@ You can edit config.json(`./BepInEx/plugins/config.json`) if you don't like defa
 | speed     | 0.5           | Increase/Decrease game speed each step (per click)           | 
 | fps       | 60            | Override FPS setting, take effects when value bigger than 60 |
 | translate | true          | Enable/Disable translation feature                           |
-| width     | 1280          | Window width: 1280                                           |
-| height    | 720           | Window height: 720                                           |
+| width     | 1280          | Game window width                                            |
+| height    | 720           | Game window height                                           |
 
 ## Key binding
 
