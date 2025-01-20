@@ -35,6 +35,7 @@ You can edit config.json(`./BepInEx/plugins/config.json`) if you don't like defa
 | translate | true          | Enable/Disable translation feature                           |
 | width     | 1280          | Game window width                                            |
 | height    | 720           | Game window height                                           |
+| zoom      | 1.0           | Character standing zoom in/out ratio                         |
 
 ## Key binding
 
