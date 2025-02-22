@@ -13,13 +13,12 @@ public class Plugin : BasePlugin
     {
         Console.OutputEncoding = Encoding.UTF8;
 
-        var log = Log;
-        Global.Log = log;
+        Global.Log = Log;
         Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
 
         TSKConfig.Read();
         Window.Init();
-        Translation.Init();
+        Translation.InitAsync().Wait();
         Patch.Initialize();
 
         AddComponent<PluginBehavior>();
