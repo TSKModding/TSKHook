@@ -62,7 +62,7 @@ public class Patch
             currentAdvId = scenarioLabel.ToLower();
             if (!Translation.chapterDicts.ContainsKey(currentAdvId))
             {
-                Translation.FetchChapterTranslation(currentAdvId);
+                Translation.FetchChapterTranslationAsync(currentAdvId).Wait();
             }
             Plugin.Global.Log.LogInfo(scenarioLabel);
         }
