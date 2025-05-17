@@ -25,7 +25,7 @@ public class Notification
 
     public static void SsPopup(string location)
     {
-        var scriptArgs = "-F ./BepInEx/plugins/SS_Notification.ps1 " + location + "";
+        var scriptArgs = "-ExecutionPolicy Bypass -F ./BepInEx/plugins/SS_Notification.ps1 " + location + "";
 
         var start = new ProcessStartInfo("powershell.exe")
         {
