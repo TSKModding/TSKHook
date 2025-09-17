@@ -18,6 +18,7 @@ public class Notification
         var start = new ProcessStartInfo("powershell.exe")
         {
             UseShellExecute = false,
+            CreateNoWindow = true,
             Arguments = script
         };
         Process.Start(start);
@@ -30,6 +31,7 @@ public class Notification
         var start = new ProcessStartInfo("powershell.exe")
         {
             UseShellExecute = false,
+            CreateNoWindow = true,
             Arguments = scriptArgs
         };
         Process.Start(start);
