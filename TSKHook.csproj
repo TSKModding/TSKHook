@@ -2,34 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>TSKHook</AssemblyName>
-    <Description>TSKHook</Description>
+    <AssemblyName>TSKHook-melon</AssemblyName>
+    <Description>melonloader implementation of TSKHook</Description>
     <Version>1.1.6</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
-    <RestoreAdditionalProjectSources>
-      https://api.nuget.org/v3/index.json;
-      https://nuget.bepinex.dev/v3/index.json
-    </RestoreAdditionalProjectSources>
     <RootNamespace>TSKHook</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile" />
-    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
   </ItemGroup>
 
   <PropertyGroup>
     <GamePath>C:\Users\husky\Twinkle_StarKnightsX</GamePath>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 	
   <ItemGroup>
     <GameDlls Include="
-		      $(GamePath)\BepInEx\interop\Assembly-CSharp.dll;
-		      $(GamePath)\BepInEx\interop\Newtonsoft.Json.dll;
-		      $(GamePath)\BepInEx\interop\Il2Cpp*.dll;
-		      $(GamePath)\BepInEx\interop\spine-*.dll;
-		      $(GamePath)\BepInEx\interop\Unity*.dll">
+              $(GamePath)\MelonLoader\net6\*.dll;
+              $(GamePath)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll;
+              $(GamePath)\MelonLoader\Il2CppAssemblies\Il2Cpp*.dll;
+              $(GamePath)\MelonLoader\Il2CppAssemblies\Unity*.dll;
+              $(GamePath)\MelonLoader\Il2CppAssemblies\spine*.dll;">
     </GameDlls>
     <Reference Include="@(GameDlls)">
       <Private>false</Private>
@@ -37,7 +32,8 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy config.json $(OutDir)&#xD;&#xA;copy SS_Notification.ps1 $(OutDir)" />
+    <Exec Command="copy config.json $(OutDir);
+                   copy SS_Notification.ps1 $(OutDir)" />
   </Target>
 	
 </Project>

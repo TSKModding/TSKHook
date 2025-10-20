@@ -15,9 +15,9 @@ public class TSKConfig
 
     public static void Read()
     {
-        if (File.Exists("./BepInEx/plugins/config.json"))
+        if (File.Exists($"{MelonLoader.Utils.MelonEnvironment.ModsDirectory}/config.json"))
         {
-            var content = File.InternalReadAllText("./BepInEx/plugins/config.json", Encoding.UTF8);
+            var content = File.InternalReadAllText($"{MelonLoader.Utils.MelonEnvironment.ModsDirectory}/config.json", Encoding.UTF8);
             var doc = JsonDocument.Parse(content);
             var config = doc.RootElement;
 
@@ -85,16 +85,16 @@ public class TSKConfig
 
             if (needWrite) WriteJsonFile(Speed, FPS, TranslationEnabled, width, width, zoom);
 
-            Plugin.Global.Log.LogInfo("Current setting:");
-            Plugin.Global.Log.LogInfo("Game speed(each step): " + Speed);
-            Plugin.Global.Log.LogInfo("FPS: " + FPS);
-            Plugin.Global.Log.LogInfo("Translation: " + (TranslationEnabled ? "Enabled" : "Disabled"));
-            Plugin.Global.Log.LogInfo("Zoom ratio: " + zoom);
+            Plugin.Global.Log.Msg("Current setting:");
+            Plugin.Global.Log.Msg("Game speed(each step): " + Speed);
+            Plugin.Global.Log.Msg("FPS: " + FPS);
+            Plugin.Global.Log.Msg("Translation: " + (TranslationEnabled ? "Enabled" : "Disabled"));
+            Plugin.Global.Log.Msg("Zoom ratio: " + zoom);
         }
         else
         {
-            Plugin.Global.Log.LogWarning("config.json not found!!!");
-            Plugin.Global.Log.LogWarning("Using default config.");
+            Plugin.Global.Log.Warning("config.json not found!!!");
+            Plugin.Global.Log.Warning("Using default config.");
             Speed = 0.5;
             FPS = 60;
             TranslationEnabled = true;
@@ -120,7 +120,7 @@ public class TSKConfig
         };
 
         var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText("./BepInEx/plugins/config.json", json);
+        File.WriteAllText($"{MelonLoader.Utils.MelonEnvironment.ModsDirectory}/config.json", json);
     }
 
     public class config

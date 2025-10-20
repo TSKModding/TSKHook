@@ -1,34 +1,43 @@
-﻿using BepInEx;
-using BepInEx.Logging;
-using BepInEx.Unity.IL2CPP;
+﻿using Il2CppInterop.Runtime.Injection;
+using MelonLoader;
 using System;
 using System.Text;
+using UnityEngine;
+
+[assembly: MelonInfo(typeof(TSKHook.Plugin), "TSKHook-melon", "1.1.6", "TSKHook")]
 
 namespace TSKHook;
 
-[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
-public class Plugin : BasePlugin
+public class Plugin : MelonMod
 {
-    public override void Load()
+    public override void OnInitializeMelon()
     {
         if (Console.LargestWindowWidth > 0)
         {
             Console.OutputEncoding = Encoding.UTF8;
         }
 
-        Global.Log = Log;
-        Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+        var log = LoggerInstance;
+        Global.Log = log;
+        log.Msg($"Plugin TSKHook is loaded!");
 
         TSKConfig.Read();
         Window.Init();
         Translation.InitAsync().Wait();
         Patch.Initialize();
 
-        AddComponent<PluginBehavior>();
+        ClassInjector.RegisterTypeInIl2Cpp<PluginBehavior>();
+        GameObject melonModObject = new GameObject
+        {
+            hideFlags = HideFlags.HideAndDontSave,
+            name = "keybinding"
+        };
+        melonModObject.AddComponent<PluginBehavior>();
+        UnityEngine.Object.DontDestroyOnLoad(melonModObject);
     }
 
     public class Global
     {
-        public static ManualLogSource Log { get; set; }
+        public static MelonLogger.Instance Log { get; set; }
     }
 }

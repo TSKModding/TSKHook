@@ -1,10 +1,10 @@
 ﻿using System.IO;
-using BepInEx;
 using HarmonyLib;
-using TMPro;
+using Il2Cpp;
+using Il2CppTMPro;
 using UnityEngine;
-using Utage;
-using UtageExtensions;
+using Il2CppUtage;
+using Il2CppUtageExtensions;
 
 namespace TSKHook;
 
@@ -18,7 +18,7 @@ public class Patch
 
     public static void Initialize()
     {
-        Harmony.CreateAndPatchAll(typeof(Patch));
+        HarmonyLib.Harmony.CreateAndPatchAll(typeof(Patch));
     }
 
     [HarmonyPrefix]
@@ -28,7 +28,7 @@ public class Patch
         if (TSKConfig.FPS > 60)
         {
             value = TSKConfig.FPS;
-            Plugin.Global.Log.LogInfo("FPS setting was overridden: " + value);
+            Plugin.Global.Log.Msg("FPS setting was overridden: " + value);
         }
     }
 
@@ -43,11 +43,11 @@ public class Patch
 
         if (scenarioLabel != null)
         {
-            if ((TranslateFont == null || TMPTranslateFont == null) && File.Exists($"{Paths.PluginPath}/font/{fontName}"))
+            if ((TranslateFont == null || TMPTranslateFont == null) && File.Exists($"{MelonLoader.Utils.MelonEnvironment.ModsDirectory}/font/{fontName}"))
             {
                 if (fontBundle == null)
                 {
-                    fontBundle = AssetBundle.LoadFromFile($"{Paths.PluginPath}/font/{fontName}");
+                    fontBundle = AssetBundle.LoadFromFile($"{MelonLoader.Utils.MelonEnvironment.ModsDirectory}/font/{fontName}");
                 }
                 TranslateFont = fontBundle.LoadAsset(fontName).Cast<Font>();
                 TMPTranslateFont = fontBundle.LoadAsset(fontName + " SDF").TryCast<TMP_FontAsset>();
@@ -55,7 +55,7 @@ public class Patch
 
                 if (TranslateFont != null && TMPTranslateFont != null)
                 {
-                    Plugin.Global.Log.LogInfo("Font loaded.");
+                    Plugin.Global.Log.Msg("Font loaded.");
                 }
             }
 
@@ -64,7 +64,7 @@ public class Patch
             {
                 Translation.FetchChapterTranslationAsync(currentAdvId).Wait();
             }
-            Plugin.Global.Log.LogInfo(scenarioLabel);
+            Plugin.Global.Log.Msg(scenarioLabel);
         }
     }
 
