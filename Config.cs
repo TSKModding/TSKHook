@@ -1,135 +1,37 @@
-﻿using System.Text.Json;
-using Il2CppSystem.IO;
-using Il2CppSystem.Text;
+using System.IO;
+using System.Threading;
+using BepInEx;
+using BepInEx.Configuration;
 
 namespace TSKHook;
 
-public class TSKConfig
+// Compatibility facade keeps upstream feature code unchanged while using one configuration source.
+public static class TSKConfig
 {
-    public static double Speed;
-    public static int FPS;
-    public static bool TranslationEnabled;
-    public static int width;
-    public static int height;
-    public static float zoom;
+    public static PluginSettings Settings { get; private set; }
+    private static int pending;
+    public static double Speed => Settings.Speed.Value;
+    public static int FPS => Settings.Fps.Value;
+    public static bool TranslationEnabled { get => Settings.Translation.Value; set => Settings.Translation.Value = value; }
+    public static int width => Settings.Width.Value;
+    public static int height => Settings.Height.Value;
+    public static float zoom => Settings.Zoom.Value;
+    public static bool UiTranslationEnabled => Settings.UiTranslation.Value;
+    public static bool UiCaptureEnabled => Settings.Capture.Value;
+    public static int UiCaptureFlushSeconds => Settings.FlushSeconds.Value;
+
+    public static void Initialize(ConfigFile config)
+    {
+        Settings = new PluginSettings(config, Path.Combine(Paths.PluginPath, "config.json"),
+            message => Plugin.Global.Log.LogWarning(message));
+        config.SettingChanged += (_, _) => Interlocked.Exchange(ref pending, 1);
+    }
 
     public static void Read()
     {
-        if (File.Exists("./BepInEx/plugins/config.json"))
-        {
-            var content = File.InternalReadAllText("./BepInEx/plugins/config.json", Encoding.UTF8);
-            var doc = JsonDocument.Parse(content);
-            var config = doc.RootElement;
-
-            var needWrite = false;
-
-            if (config.TryGetProperty("speed", out var sValue))
-            {
-                Speed = sValue.GetDouble();
-            }
-            else
-            {
-                Speed = 0.5;
-                needWrite = true;
-            }
-
-            if (config.TryGetProperty("fps", out var fValue))
-            {
-                FPS = fValue.GetInt32();
-            }
-            else
-            {
-                FPS = 60;
-                needWrite = true;
-            }
-
-            if (config.TryGetProperty("translation", out var tValue))
-            {
-                TranslationEnabled = tValue.GetBoolean();
-            }
-            else
-            {
-                TranslationEnabled = true;
-                needWrite = true;
-            }
-
-            if (config.TryGetProperty("width", out var wValue))
-            {
-                width = wValue.GetInt32();
-            }
-            else
-            {
-                width = 1280;
-                needWrite = true;
-            }
-
-            if (config.TryGetProperty("height", out var hValue))
-            {
-                height = hValue.GetInt32();
-            }
-            else
-            {
-                height = 720;
-                needWrite = true;
-            }
-
-            if (config.TryGetProperty("zoom", out var zValue))
-            {
-                zoom = (float)zValue.GetDouble();
-            }
-            else
-            {
-                zoom = 1.0f;
-                needWrite = true;
-            }
-
-            if (needWrite) WriteJsonFile(Speed, FPS, TranslationEnabled, width, width, zoom);
-
-            Plugin.Global.Log.LogInfo("Current setting:");
-            Plugin.Global.Log.LogInfo("Game speed(each step): " + Speed);
-            Plugin.Global.Log.LogInfo("FPS: " + FPS);
-            Plugin.Global.Log.LogInfo("Translation: " + (TranslationEnabled ? "Enabled" : "Disabled"));
-            Plugin.Global.Log.LogInfo("Zoom ratio: " + zoom);
-        }
-        else
-        {
-            Plugin.Global.Log.LogWarning("config.json not found!!!");
-            Plugin.Global.Log.LogWarning("Using default config.");
-            Speed = 0.5;
-            FPS = 60;
-            TranslationEnabled = true;
-            width = 1280;
-            height = 720;
-            zoom = 1.0f;
-
-            // Create default JSON file
-            WriteJsonFile(0.5, 60, true, width, height, zoom);
-        }
+        Settings.Reload();
+        Interlocked.Exchange(ref pending, 1);
     }
 
-    public static void WriteJsonFile(double speed, int fps, bool enabled, int w, int h, float z)
-    {
-        var config = new config
-        {
-            speed = speed,
-            fps = fps,
-            translation = enabled,
-            width = w,
-            height = h,
-            zoom = z
-        };
-
-        var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText("./BepInEx/plugins/config.json", json);
-    }
-
-    public class config
-    {
-        public double speed { get; set; }
-        public int fps { get; set; }
-        public bool translation { get; set; }
-        public int width { get; set; }
-        public int height { get; set; }
-        public float zoom { get; set; }
-    }
+    internal static bool ConsumeChange() => Interlocked.Exchange(ref pending, 0) != 0;
 }

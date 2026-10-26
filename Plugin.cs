@@ -19,7 +19,8 @@ public class Plugin : BasePlugin
         Global.Log = Log;
         Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
 
-        TSKConfig.Read();
+        TSKConfig.Initialize(Config);
+        UiRuntimeController.Initialize();
         Window.Init();
         Translation.InitAsync().Wait();
         Patch.Initialize();

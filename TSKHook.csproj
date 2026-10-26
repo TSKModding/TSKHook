@@ -1,11 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>TSKHook</AssemblyName>
     <Description>TSKHook</Description>
-    <Version>1.1.6</Version>
+    <Version>1.7.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
     <RestoreAdditionalProjectSources>
       https://api.nuget.org/v3/index.json;
@@ -15,12 +17,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile" />
-    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.785" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="*.cs;Extensions/*.cs;Extensions/Core/*.cs" />
+    <EmbeddedResource Include="Extensions/Core/Data/OpenCC-LICENSE.txt.gz" LogicalName="TSKHook.OpenCC.License.gz" />
+    <EmbeddedResource Include="Extensions/Core/Data/chinese-characters.gz" LogicalName="TSKHook.ChineseCharacters" />
   </ItemGroup>
 
   <PropertyGroup>
-    <GamePath>C:\Users\husky\Twinkle_StarKnightsX</GamePath>
+    <GamePath Condition="'$(GamePath)' == ''">C:\Users\husky\Twinkle_StarKnightsX</GamePath>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -37,7 +45,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy config.json $(OutDir)&#xD;&#xA;copy SS_Notification.ps1 $(OutDir)" />
+    <Copy SourceFiles="SS_Notification.ps1" DestinationFolder="$(OutDir)" />
   </Target>
 	
 </Project>

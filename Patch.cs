@@ -19,6 +19,43 @@ public class Patch
     public static void Initialize()
     {
         Harmony.CreateAndPatchAll(typeof(Patch));
+        Harmony.CreateAndPatchAll(typeof(NetworkCapturePatch));
+        Harmony.CreateAndPatchAll(typeof(UiFontFallbackPatch));
+        Harmony.CreateAndPatchAll(typeof(UiImageEventPatch));
+        Harmony.CreateAndPatchAll(typeof(UiRuntimeActivity));
+    }
+
+    internal static void EnsureTranslationFontLoaded()
+    {
+        if (TranslateFont != null && TMPTranslateFont != null)
+        {
+            return;
+        }
+
+        var path = $"{Paths.PluginPath}/font/{fontName}";
+        if (!File.Exists(path))
+        {
+            Plugin.Global.Log.LogWarning($"[UI Translation] Font bundle not found: {path}");
+            return;
+        }
+
+        try
+        {
+            fontBundle = AssetBundle.LoadFromFile(path);
+            TranslateFont = fontBundle.LoadAsset(fontName).Cast<Font>();
+            TMPTranslateFont = fontBundle.LoadAsset(fontName + " SDF").TryCast<TMP_FontAsset>();
+            fontBundle.Unload(false);
+            fontBundle = null;
+
+            if (TranslateFont != null && TMPTranslateFont != null)
+            {
+                Plugin.Global.Log.LogInfo("[UI Translation] Font loaded.");
+            }
+        }
+        catch (System.Exception exception)
+        {
+            Plugin.Global.Log.LogWarning($"[UI Translation] Failed to load font: {exception}");
+        }
     }
 
     [HarmonyPrefix]
@@ -43,21 +80,7 @@ public class Patch
 
         if (scenarioLabel != null)
         {
-            if ((TranslateFont == null || TMPTranslateFont == null) && File.Exists($"{Paths.PluginPath}/font/{fontName}"))
-            {
-                if (fontBundle == null)
-                {
-                    fontBundle = AssetBundle.LoadFromFile($"{Paths.PluginPath}/font/{fontName}");
-                }
-                TranslateFont = fontBundle.LoadAsset(fontName).Cast<Font>();
-                TMPTranslateFont = fontBundle.LoadAsset(fontName + " SDF").TryCast<TMP_FontAsset>();
-                fontBundle.Unload(false);
-
-                if (TranslateFont != null && TMPTranslateFont != null)
-                {
-                    Plugin.Global.Log.LogInfo("Font loaded.");
-                }
-            }
+            EnsureTranslationFontLoaded();
 
             currentAdvId = scenarioLabel.ToLower();
             if (!Translation.chapterDicts.ContainsKey(currentAdvId))
@@ -80,7 +103,7 @@ public class Patch
         string value;
         if (Translation.chapterDicts.ContainsKey(currentAdvId) && Translation.chapterDicts[currentAdvId].TryGetValue(__instance.TitleText, out value))
         {
-            __instance.TitleText = value.IsNullOrEmpty() ? __instance.TitleText : value;
+            __instance.TitleText = value.IsNullOrEmpty() ? __instance.TitleText : UiTranslationService.ConvertText(value);
         }
     }
 
@@ -138,7 +161,7 @@ public class Patch
         string value;
         if (Translation.nameDicts.TryGetValue(__result, out value))
         {
-            __result = value.IsNullOrEmpty() ? __result : value;
+            __result = value.IsNullOrEmpty() ? __result : UiTranslationService.ConvertText(value);
         }
     }
 
@@ -154,7 +177,7 @@ public class Patch
         string value;
         if (Translation.nameDicts.TryGetValue(__result, out value))
         {
-            __result = value.IsNullOrEmpty() ? __result : value;
+            __result = value.IsNullOrEmpty() ? __result : UiTranslationService.ConvertText(value);
         }
     }
 
@@ -171,7 +194,7 @@ public class Patch
         string value;
         if (Translation.chapterDicts.ContainsKey(currentAdvId) && Translation.chapterDicts[currentAdvId].TryGetValue(__result, out value))
         {
-            __result = value.IsNullOrEmpty() ? __result : value;
+            __result = value.IsNullOrEmpty() ? __result : UiTranslationService.ConvertText(value);
         }
     }
 

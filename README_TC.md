@@ -10,9 +10,11 @@
    ![3x speed](./img/3x.gif)
 2. 內置遊戲截圖
 3. FPS設定
-4. [中文翻譯](Translation.md)
+4. [中文翻譯](Translation.md)（可選簡繁轉換）
 5. 遊戲視窗大小設定
 6. 更改圖鑑放大縮小倍率
+7. UI 文字與圖片翻譯，支援獨立資源更新及回退
+8. 可選文字擷取及本機翻譯預覽
 
 ## 需求
 
@@ -24,29 +26,37 @@
 下載[Release](https://github.com/TSKModding/TSKHook/releases)
 並解壓縮至您的星騎士安裝位置 `C:\Users\<username>\Twinkle_StarKnightsX`
 
+遊戲內設定需安裝 [IL2CPP ConfigurationManager](https://github.com/anosu/BepInEx.ConfigurationManager/releases) 的 ConfigurationManager.dll 及 BepInEx.KeyboardShortcut.dll。UI 資源由 [TSKHook-UITranslations](https://github.com/Azure-Sora/TSKHook-UITranslations) 維護。
+
 ## 設定
 
-如果您不喜歡預設設定，可以編輯config.json(`./BepInEx/plugins/config.json`).
+已安裝設定管理器時，按 F1 開啟設定；未安裝時則重新讀取設定。亦可關閉遊戲後編輯 `BepInEx/config` 中產生的設定檔。舊 `plugins/config.json` 僅匯入一次；Maintenance 可重新讀取設定、檢查、重載及回退資源包。
 
 | 欄位        | 預設值  | 說明                         |
 |-----------|------|----------------------------|
-| speed     | 0.5  | 加快/減慢遊戲速度 (每按一下)           | 
-| fps       | 60   | 更改FPS值, 只會在遊戲開啟60FPS的情況下生效 |
-| translate | true | 閣啟/關閉中文翻譯功能                |
-| width     | 1280 | 遊戲視窗寬度                     |
-| height    | 720  | 遊戲視窗高度                     | 
-| zoom      | 1.0  | 角色立繪放大縮小倍率                 |
+| General/SpeedStep | 0.5  | 加快/減慢遊戲速度 (每按一下)           |
+| General/FPS | 60   | 更改FPS值, 只會在遊戲開啟60FPS的情況下生效 |
+| Translation/Enabled | true | 閣啟/關閉中文翻譯功能                |
+| General/WindowWidth | 1280 | 遊戲視窗寬度                     |
+| General/WindowHeight | 720  | 遊戲視窗高度                     |
+| General/CharacterZoom | 1.0  | 角色立繪放大縮小倍率                 |
+| Translation/UIEnabled | true | 開啟 UI 翻譯 |
+| Translation/ImagesEnabled | true | 開啟 UI 圖片替換 |
+| Translation/ChineseScript | Original | 保持原譯文，或轉換為簡體／繁體 |
+| Capture/Enabled | false | 儲存擷取文字至 `plugins/TSKHook/ui_capture` |
+| Updates/Enabled | true | 僅在遊戲啟動後檢查一次文字／圖片包；失敗時保留本機資源 |
+| Updates/LocalPreview | false | 讀取 `plugins/TSKHook/ui_preview.jsonl` 並暫停公開更新 |
 
 ## 綁定鍵
 
 | 按鍵   | 類型 | 說明                                       |
 |------|----|------------------------------------------|
-| F1   | 重載 | 重載TSKHook設定，可用於即時更改遊戲視窗大小                |
+| F1   | 設定 | 已安裝管理器時開啟設定，否則重新讀取設定                    |
 | F5   | 靜止 | 將遊戲暫時凍結                                  |
 | F6   | 重設 | 將遊戲重設至正常速度                               | 
-| F7   | 減少 | 減慢遊戲速度，視乎您的 `speed` 設定                   | 
-| F8   | 增加 | 加快遊戲速度，視乎您的 `speed` 設定                   |
-| F10  | 翻譯 | 刪除翻譯快取                                   |
+| F7   | 減少 | 減慢遊戲速度，視乎您的 `General/SpeedStep` 設定                   |
+| F8   | 增加 | 加快遊戲速度，視乎您的 `General/SpeedStep` 設定                   |
+| F10  | 翻譯 | 清除劇情快取並重載 UI 翻譯                                   |
 | F11  | 翻譯 | 開啟/關閉中文翻譯功能                              |
 | F12  | 截圖 | 截取當前的遊戲畫面至`C:\Users\<username>\Pictures` |
 | Ctrl | 跳過 | 按Ctrl能跳過文字，就像Galgame的Ctrl skip功能         |

@@ -16,6 +16,7 @@ public class PluginBehavior : MonoBehaviour
 
     private void Update()
     {
+        if (UiRuntimeController.Update()) return;
         if (Input.GetKeyDown(KeyCode.F8))
         {
             CurrentGameSpeed = Time.timeScale + (float)TSKConfig.Speed;
@@ -70,8 +71,9 @@ public class PluginBehavior : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F10))
         {
             Translation.chapterDicts = new();
+            UiRuntimeController.LoadActiveTranslations();
             Plugin.Global.Log.LogInfo("[Translator] cache cleared.");
-            Notification.Popup("Translation", "Translation cache cleared.");
+            Notification.Popup("Translation", "Translation cache cleared and UI translations reloaded.");
         }
 
         if (Input.GetKeyDown(KeyCode.F11))
@@ -89,13 +91,6 @@ public class PluginBehavior : MonoBehaviour
             ScreenCapture.CaptureScreenshot(location);
 
             Notification.SsPopup(location);
-        }
-
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            TSKConfig.Read();
-            Window.Init();
-            Plugin.Global.Log.LogInfo("[Config] reloaded.");
         }
 
         LastSkipExecuteTime += Time.deltaTime;
@@ -124,5 +119,15 @@ public class PluginBehavior : MonoBehaviour
             Application.targetFrameRate = TSKConfig.FPS;
             Plugin.Global.Log.LogInfo("FPS changed. Reset to: " + TSKConfig.FPS);
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        UiRuntimeController.Shutdown();
+    }
+
+    private void OnDestroy()
+    {
+        UiRuntimeController.Shutdown();
     }
 }
